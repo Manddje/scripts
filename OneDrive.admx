@@ -10,16 +10,6 @@
     <category name="OneDriveNGSC" displayName="$(string.OneDriveNGSCSettingCategory)"/>
   </categories>
   <policies>
-  <policy name="EnableADAL" class="User" displayName="$(string.EnableADAL)" explainText="$(string.EnableADAL_Help)" key="SOFTWARE\Microsoft\OneDrive" valueName="EnableADAL">
- <parentCategory ref="OneDriveNGSC" />
- <supportedOn ref="windows:SUPPORTED_Windows7" />
- <enabledValue>
- <decimal value="1" />
- </enabledValue>
- <disabledValue>
- <decimal value="0" />
- </disabledValue>
- </policy>
     <policy name="DisablePersonalSync" class="User" displayName="$(string.DisablePersonalSync)" explainText="$(string.DisablePersonalSync_help)" key="SOFTWARE\Policies\Microsoft\OneDrive" valueName="DisablePersonalSync">
       <parentCategory ref="OneDriveNGSC" />
       <supportedOn ref="windows:SUPPORTED_Windows7" />
@@ -39,6 +29,29 @@
       <disabledValue>
         <decimal value="0" />
       </disabledValue>
+    </policy>
+    <policy name="GPOSetUpdateRing" class="Machine" displayName="$(string.GPOSetUpdateRing)" explainText="$(string.GPOSetUpdateRing_help)" presentation="$(presentation.GPOSetUpdateRing_Pres)" key="SOFTWARE\Policies\Microsoft\OneDrive">
+      <parentCategory ref="OneDriveNGSC" />
+      <supportedOn ref="windows:SUPPORTED_Windows7" />
+      <elements>
+        <enum id="GPOSetUpdateRing_Dropdown" valueName="GPOSetUpdateRing">
+          <item displayName="$(string.Enterprise)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.Production)">
+            <value>
+              <decimal value="5" />
+            </value>
+          </item>
+          <item displayName="$(string.Insider)">
+            <value>
+              <decimal value="4" />
+            </value>
+          </item>
+        </enum>
+      </elements>
     </policy>
     <policy name="DefaultRootDir" class="User" displayName="$(string.DefaultRootDir)" explainText="$(string.DefaultRootDir_help)" presentation="$(presentation.DefaultRootDir_Pres)" key="SOFTWARE\Policies\Microsoft\OneDrive" valueName="DefaultRootDir">
       <parentCategory ref="OneDriveNGSC" />
@@ -171,6 +184,7 @@
       <supportedOn ref="windows:SUPPORTED_Windows7" />
       <elements>
         <text id="SharePointOnPremFrontDoorUrlBox" maxLength="2000" required="true" valueName="SharePointOnPremFrontDoorUrl"/>
+        <text id="SharePointOnPremTenantNameBox" maxLength="2000" required="true" valueName="SharePointOnPremTenantName"/>
       </elements>
     </policy>
     <policy name="SharePointOnPremPrioritization" class="Machine" displayName="$(string.SharePointOnPremPrioritization)" explainText="$(string.SharePointOnPremPrioritization_help)" presentation="$(presentation.SharePointOnPremPrioritization_Pres)" key="SOFTWARE\Policies\Microsoft\OneDrive">
@@ -247,14 +261,42 @@
         <decimal value="0" />
       </disabledValue>
     </policy>
-    <!-- <policy name="AutoMountTeamSites" class="Machine" displayName="$(string.AutoMountTeamSites)" explainText="$(string.AutoMountTeamSites_help)" presentation="$(presentation.AutoMountTeamSites_Pres)" key="SOFTWARE\Policies\Microsoft\OneDrive">
+    <policy name="AutoMountTeamSites" class="Both" displayName="$(string.AutoMountTeamSites)" explainText="$(string.AutoMountTeamSites_help)" presentation="$(presentation.AutoMountTeamSites_Pres)" key="SOFTWARE\Policies\Microsoft\OneDrive">
       <parentCategory ref="OneDriveNGSC" />
       <supportedOn ref="windows:SUPPORTED_Windows_10_0_RS3" />
         <elements>
           <list id="AutoMountTeamSitesListBox" key="Software\Policies\Microsoft\OneDrive\TenantAutoMount" additive="true" expandable="false" explicitValue="true" />
         </elements>
-    </policy> -->
+    </policy>    
+    <policy name="DisablePauseOnBatterySaver" class="User" displayName="$(string.DisablePauseOnBatterySaver)" explainText="$(string.DisablePauseOnBatterySaver_help)" key="SOFTWARE\Policies\Microsoft\OneDrive" valueName="DisablePauseOnBatterySaver">
+      <parentCategory ref="OneDriveNGSC" />
+      <supportedOn ref="windows:SUPPORTED_Windows7" />
+       <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+    <policy name="DisablePauseOnMeteredNetwork" class="User" displayName="$(string.DisablePauseOnMeteredNetwork)" explainText="$(string.DisablePauseOnMeteredNetwork_help)" key="SOFTWARE\Policies\Microsoft\OneDrive" valueName="DisablePauseOnMeteredNetwork">
+      <parentCategory ref="OneDriveNGSC" />
+      <supportedOn ref="windows:SUPPORTED_Windows7" />
+       <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
 <!-- Insert multi-tenant settings here -->
 <!-- See http://go.microsoft.com/fwlink/p/?LinkId=797547 for configuration instructions -->
+<!-- Commented out before strings finalized.
+     <policy name="LocalMassDeleteFileDeleteThreshold" class="Machine" displayName="$(string.LocalMassDeleteFileDeleteThreshold)" explainText="$(string.LocalMassDeleteFileDeleteThreshold_help)" presentation="$(presentation.LocalMassDeleteFileDeleteThreshold_Pres)" key="SOFTWARE\Policies\Microsoft\OneDrive">
+      <parentCategory ref="OneDriveNGSC" />
+      <supportedOn ref="windows:SUPPORTED_Windows7" />
+      <elements>
+        <decimal id="LMDFileDeleteThresholdBox" valueName="LocalMassDeleteFileDeleteThreshold" minValue="0" maxValue="100000" />
+      </elements>
+    </policy> -->
   </policies>
 </policyDefinitions>
